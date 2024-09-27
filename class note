@@ -1,0 +1,8 @@
+上課需安裝 node.js 和 git
+
+讓VS能夠從gitgub上抓檔案下來
+
+要將課堂上檔案新增至github需在終端打上
+git config --global user.name ParameciumMAX
+git config --global user.email a41923960@gmail.com
+來登入GIT
