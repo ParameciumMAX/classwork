@@ -1,3 +1,5 @@
+var readline = require('readline-sync');
+
 var ary2d=[
     [1,2,3], //index 0
     [4,5,6], //index 1
@@ -38,4 +40,16 @@ for(var _row=0;_row<row;_row++){
     for(var _col=0;_col<col;_col++){
         dynaAry2d[_row].push(_col*_row);
     }
-}
+}//陣列內容為該位置的積
+console.log(dynaAry2d);
+
+var row2 = readline.question("Enter row:");
+var col2 = readline.question("Enter col:");//輸入陣列的行列數
+var a2d = [];
+for(var rowa = 0; rowa < row2; rowa++){
+    a2d.push([]);
+    for(var cola = 0; cola < col2; cola++){
+        a2d[rowa].push((rowa+1)+","+(cola+1));
+    }
+}//將每個陣列的位置顯示座標
+console.log(a2d)
