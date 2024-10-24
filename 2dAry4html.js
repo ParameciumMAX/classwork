@@ -24,4 +24,4 @@ for(var _row=0;_row<row;_row++){
         canvas.fillRect(_row*120,_col*120,120,120);
         canvas.strokeRect(_row*120,_col*120,120,120);
     }
-}
+};
