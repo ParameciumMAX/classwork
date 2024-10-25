@@ -16,6 +16,7 @@ class Life{
         }
         
     }
+
     initialize = function(){
         this.grid[1][1] = Live;
         this.grid[1][2] = this.grid[1][3] = this.grid[1][4] =Live; 
@@ -42,8 +43,7 @@ class Life{
 
           this.grid = null;
           this.grid = nextGrid;
-    } 
-
+    }
 
     neighborCount = function(row, col){
         var count=0;
@@ -60,12 +60,30 @@ class Life{
         count += this.getStatusAt(row+1, col+1);      
         return count;   
     }
+
     getStatusAt = function(row, col){
         if(row<0 || col<0 || row >= this.row || col >= this.col){
            return Dead;
         }else{
             return this.grid[row][col];
         }
+    }
+
+    mapdraw = function(){
+        var canvas = document.getElementById("map").getContext("2d");
+        for(var _row=0;_row<this.row;_row++){
+            for(var _col=0;_col<this.col;_col++){
+                //ar2d[_row][_col]=>0,1
+                if(nextGrid[_row][_col]==1){
+                    canvas.fillStyle="#0000ff"
+                }else{
+                    canvas.fillStyle="#000000"
+                }
+                //coordinate, width, heigth
+                canvas.fillRect(this.col*60,this._row*60,60,60);
+                canvas.strokeRect(this._col*60,this._row*60,60,60);
+            }
+        };
     }
 }
 
@@ -79,5 +97,7 @@ var myGame2 = new Life(100,100);
 
 myGame.initialize();
 myGame.update();
+
+myGame.mapdraw();
 
 console.log(myGame);
