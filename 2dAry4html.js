@@ -21,7 +21,7 @@ for(var _row=0;_row<row;_row++){
             canvas.fillStyle="#000000"
         }
         //600/5=>120  coordinate, width, heigth
-        canvas.fillRect(_row*120,_col*120,120,120);
-        canvas.strokeRect(_row*120,_col*120,120,120);
+        canvas.fillRect(_col*120,_row*120,120,120);
+        canvas.strokeRect(_col*120,_row*120,120,120);
     }
 };

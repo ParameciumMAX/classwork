@@ -6,6 +6,11 @@ var abc=[
     [0,0,0,0,0]   //4
 ];
 
+var abc2=[
+    [0,0,0,0,0],
+    [0,0,0,0,0]
+];
+
 var row=abc.length;
 var col=abc[0].length;
 var count=0;
