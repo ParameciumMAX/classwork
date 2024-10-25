@@ -8,7 +8,8 @@ var abc=[
 
 var row=abc.length;
 var col=abc[0].length;
-var count;
+var count=0;
+var counta=0;
 
 for(var a=0;a<row;a++){
     for(var b=0;b<col;b++){
@@ -18,5 +19,23 @@ for(var a=0;a<row;a++){
     }
 };
 
+for(var a2=0;a2<row;a2++){
+    for(var b2=0;b2<col;b2++){
+        find(a2,b2);
+    }
+};
 
-console.log("There here"+count+"number 1");
+function find(i,j){
+    for(var x = -1;x<=1;x++){
+        for(var y = -1;y<=1;y++){
+    if((i+x)<0||(j+x)<0){
+        return 0;
+    }else{
+        counta+=1;
+    }
+    }
+}
+};
+
+console.log("There are "+count+" number 1.");
+console.log("There are "+counta+" life.");
