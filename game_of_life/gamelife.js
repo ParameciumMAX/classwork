@@ -17,9 +17,17 @@ class Life{
         
     }
 
-    initialize = function(){
+    initialize = function(random){
+        if(random == true){
+            for(var _row=0;_row < this.row;_row++){
+                for(var _col=0;_col < this.col;_col++){
+                    this.grid[_row][_col] = (Math.random()<0.2) ? Live : Dead;
+                }
+            }
+        }else{
         this.grid[1][1] = Live;
-        this.grid[1][2] = this.grid[1][3] = this.grid[1][4] =Live; 
+        this.grid[1][2] = this.grid[1][3] = this.grid[1][4] =Live;
+        }
     }
 
     update = function(){
@@ -69,35 +77,78 @@ class Life{
         }
     }
 
-    mapdraw = function(){
-        var canvas = document.getElementById("map").getContext("2d");
+    mapdraw = function(_canvas){
+        var canvas = document.getElementById(_canvas).getContext("2d");
+        this.size = Math.min(canvas.canvas.height/this.row,canvas.canvas.width/this.col);
         for(var _row=0;_row<this.row;_row++){
             for(var _col=0;_col<this.col;_col++){
                 //ar2d[_row][_col]=>0,1
-                if(nextGrid[_row][_col]==1){
-                    canvas.fillStyle="#0000ff"
+                if(this.grid[_row][_col]==Live){
+                    canvas.fillStyle="#000fff"
                 }else{
-                    canvas.fillStyle="#000000"
+                    canvas.fillStyle="#ffffff"
                 }
                 //coordinate, width, heigth
-                canvas.fillRect(this.col*60,this._row*60,60,60);
-                canvas.strokeRect(this._col*60,this._row*60,60,60);
+                canvas.fillRect(_col*this.size,_row*this.size,this.size,this.size);
+                canvas.strokeRect(_col*this.size,_row*this.size,this.size,this.size);
             }
         };
     }
+
+
+    mapdrawpoint = function(_canvas,_row,_col){
+        var canvas = document.getElementById(_canvas).getContext("2d");
+        this.size = Math.min(canvas.canvas.height/this.row,canvas.canvas.width/this.col);
+        if(this.grid[_row][_col]==Live){
+            canvas.fillStyle="#000fff"
+        }else{
+            canvas.fillStyle="#ffffff"
+        }
+            //coordinate, width, heigth
+            canvas.fillRect(_col*this.size,_row*this.size,this.size,this.size);
+            canvas.strokeRect(_col*this.size,_row*this.size,this.size,this.size);
+        }
 }
 
-// Life.prototype.update= function(){
+function next(){
+    myGame.update();
+    myGame.mapdraw("map");
+}
 
-// }
+function mouseclick(event){
+    var _row = Math.floor(event.offsetY/myGame.size);
+    var _col = Math.floor(event.offsetX/myGame.size);
+    
+    //myGame.grid[_row][_col] = (myGame.getStatusAt(_row,_col)==Live) ? Dead : Live;
+//  = if(myGame.getStatusAt(_row,_col)==Live){
+//     myGame.grid[_row][_col]=Dead;
+//    }else{
+//     myGame.grid[_row][_col]=Live;
+//    }
+    myGame.grid[_row][_col] = Number(!myGame.getStatusAt(_row,_col));
 
+    myGame.mapdrawpoint("map",_row,_col);
+}
 
-var myGame = new Life(10,10);
+function random(){
+    myGame.initialize(true);
+    myGame.mapdraw("map");
+}
+
+var time;
+function run(){
+    var step = document.getElementById("step").value;
+    time = setInterval(next, Number(step));
+}
+
+function stop(){
+    clearInterval(time);
+}
+
+var myGame = new Life(100,100);
 var myGame2 = new Life(100,100);
 
 myGame.initialize();
-myGame.update();
+myGame.mapdraw("map");
 
-myGame.mapdraw();
-
-console.log(myGame);
+var running= setTimeout(next,1000);
